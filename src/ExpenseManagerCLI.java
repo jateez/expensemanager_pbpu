@@ -8,7 +8,10 @@ public class ExpenseManagerCLI {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Expense Money Manager");
+            System.out.println("===========================");
+            System.out.println("   Expense Money Manager");
+            System.out.println("===========================");
+
             System.out.println("1. Create a new expense record");
             System.out.println("2. Search expenses by date");
             System.out.println("3. Read information of an existing expense record");
