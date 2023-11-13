@@ -1,11 +1,13 @@
 import java.util.Date;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class Expense implements Serializable {
     private Date timestamp;
     private double amount;
     private String subject;
     private String additionalNote;
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Expense() {
     }
@@ -48,4 +50,16 @@ public class Expense implements Serializable {
     public Date getTimestamp() {
         return timestamp;
     }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return String.format(
+                DATE_FORMAT.format(this.getTimestamp()) + " | " +
+                        this.getAmount() + " | " +
+                        this.getSubject() + " | " +
+                        this.getAdditionalNote())
+                + "\n";
+    }
+
 }
