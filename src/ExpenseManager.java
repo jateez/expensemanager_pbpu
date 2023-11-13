@@ -21,8 +21,13 @@ public class ExpenseManager {
     }
 
     public List<Expense> searchExpensesByDate(String dateString) {
-        // Implement your search logic here
-        return null;
+        List<Expense> searchResults = new ArrayList<>();
+        for (Expense expense : expenses) {
+            if (DATE_FORMAT.format(expense.getTimestamp()).contains(dateString)) {
+                searchResults.add(expense);
+            }
+        }
+        return searchResults;
     }
 
     public Expense readExpense(int index) {

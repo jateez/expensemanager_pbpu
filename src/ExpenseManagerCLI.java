@@ -1,7 +1,10 @@
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Scanner;
 
 public class ExpenseManagerCLI {
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) {
         ExpenseManager expenseManager = new ExpenseManager();
@@ -27,7 +30,7 @@ public class ExpenseManagerCLI {
                     createExpense(scanner, expenseManager);
                     break;
                 case 2:
-
+                    searchExpenses(scanner, expenseManager);
                     break;
                 case 3:
 
@@ -72,6 +75,20 @@ public class ExpenseManagerCLI {
     }
 
     private static void searchExpenses(Scanner scanner, ExpenseManager expenseManager) {
+        System.out.print("Input date (yyyy-mm-dd): ");
+        String subject = scanner.nextLine();
+
+        List<Expense> searchResults = expenseManager.searchExpensesByDate(subject);
+        if (searchResults.isEmpty()) {
+            System.out.println("Expense not found");
+        } else {
+            System.out.println();
+            System.out.println("   Expense Search Result");
+            System.out.println("===========================");
+            for (Expense expense : searchResults) {
+                System.out.printf("%20s | %7.0f | %-20s | %s \n", DATE_FORMAT.format(expense.getTimestamp()), expense.getAmount(), expense.getSubject(), expense.getAdditionalNote());
+            }
+        }
     }
 
     private static void readExpense(Scanner scanner, ExpenseManager expenseManager) {
