@@ -33,7 +33,7 @@ public class ExpenseManagerCLI {
                     searchExpenses(scanner, expenseManager);
                     break;
                 case 3:
-
+                    readExpenses(scanner, expenseManager);
                     break;
                 case 4:
 
@@ -92,7 +92,17 @@ public class ExpenseManagerCLI {
     }
 
     private static void readExpense(Scanner scanner, ExpenseManager expenseManager) {
-
+        System.out.print("Enter the index of the expense you want to read: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        
+        Expense expense = expenseManager.readExpense(index);
+        if (expense != null) {
+            System.out.println("Expense found:");
+            System.out.println(expense);
+        } else {
+            System.out.println("Expense not found at index " + index);
+        }
     }
 
     private static void updateExpense(Scanner scanner, ExpenseManager expenseManager) {
