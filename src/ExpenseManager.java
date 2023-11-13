@@ -31,8 +31,11 @@ public class ExpenseManager {
     }
 
     public Expense readExpense(int index) {
-        // Implement your read logic here
-        return null;
+        if (index >= 0 && index < expenses.size()) {
+            return expenses.get(index);
+        } else {
+            return null;
+        }
     }
 
     public void updateExpense(int index, Expense updatedExpense) {
