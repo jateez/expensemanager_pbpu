@@ -53,7 +53,7 @@ public class Expense implements Serializable {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
+
         return String.format(
                 DATE_FORMAT.format(this.getTimestamp()) + " | " +
                         this.getAmount() + " | " +

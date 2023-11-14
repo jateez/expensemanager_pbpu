@@ -94,7 +94,8 @@ public class ExpenseManagerCLI {
             System.out.println("   Expense Search Result");
             System.out.println("===========================");
             for (Expense expense : searchResults) {
-                System.out.printf("%20s | %7.0f | %-20s | %s \n", DATE_FORMAT.format(expense.getTimestamp()), expense.getAmount(), expense.getSubject(), expense.getAdditionalNote());
+                System.out.printf("%20s | %7.0f | %-20s | %s \n", DATE_FORMAT.format(expense.getTimestamp()),
+                        expense.getAmount(), expense.getSubject(), expense.getAdditionalNote());
             }
         }
     }
@@ -103,7 +104,7 @@ public class ExpenseManagerCLI {
         System.out.print("Enter the index of the expense you want to read: ");
         int index = scanner.nextInt();
         scanner.nextLine();
-        
+
         Expense expense = expenseManager.readExpense(index);
         if (expense != null) {
             System.out.println("Expense found:");
@@ -114,48 +115,67 @@ public class ExpenseManagerCLI {
     }
 
     private static void updateExpense(Scanner scanner, ExpenseManager expenseManager) {
-      System.out.print("Enter the index of the expense you want to update: ");
-      int index = scanner.nextInt();
-      scanner.nextLine();
-  
-      Expense existingExpense = expenseManager.readExpense(index);
-  
-      if (existingExpense != null) {
-          System.out.println("Enter updated expense details:");
-  
-          // Get user input
-          System.out.print("Amount: ");
-          double amount = scanner.nextDouble();
-          scanner.nextLine(); // Consume the newline character
-  
-          System.out.print("Subject: ");
-          String subject = scanner.nextLine();
-  
-          System.out.print("Additional Note: ");
-          String additionalNote = scanner.nextLine();
-  
-          // Set timestamp to the current date and time
-          Expense updatedExpense = new Expense();
-          updatedExpense.setTimestamp(new java.util.Date());
-          updatedExpense.setAmount(amount);
-          updatedExpense.setSubject(subject);
-          updatedExpense.setAdditionalNote(additionalNote);
-  
-          expenseManager.updateExpense(index, updatedExpense);
-      } else {
-          System.out.println("Expense not found at index " + index);
-      }
+        System.out.print("Enter the index of the expense you want to update: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+
+        Expense existingExpense = expenseManager.readExpense(index);
+
+        if (existingExpense != null) {
+            System.out.println("Current expense details:");
+            System.out.println(existingExpense.toString());
+            System.out.println("Enter updated expense details:");
+
+            // Get user input
+            System.out.print("Amount: ");
+            double amount = scanner.nextDouble();
+            scanner.nextLine(); // Consume the newline character
+
+            System.out.print("Subject: ");
+            String subject = scanner.nextLine();
+
+            System.out.print("Additional Note: ");
+            String additionalNote = scanner.nextLine();
+
+            // Set timestamp to the current date and time
+            Expense updatedExpense = new Expense();
+            updatedExpense.setTimestamp(new java.util.Date());
+            updatedExpense.setAmount(amount);
+            updatedExpense.setSubject(subject);
+            updatedExpense.setAdditionalNote(additionalNote);
+
+            expenseManager.updateExpense(index, updatedExpense);
+        } else {
+            System.out.println("Expense not found at index " + index);
+        }
     }
 
     private static void deleteExpense(Scanner scanner, ExpenseManager expenseManager) {
-      System.out.print("Enter the index of the expense you want to delete: ");
-      int index = scanner.nextInt();
-      scanner.nextLine(); // Consume the newline character
-  
-      expenseManager.deleteExpense(index);
+        System.out.print("Enter the index of the expense you want to delete: ");
+        int index = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        Expense expenseToDelete = expenseManager.readExpense(index);
+        if (expenseToDelete != null) {
+            System.out.println("Expense found:");
+            System.out.println(expenseToDelete.toString());
+
+            System.out.print("Do you really want to delete this expense? (yes/no): ");
+            String confirmation = scanner.nextLine().trim().toLowerCase();
+
+            if (confirmation.equals("yes")) {
+                expenseManager.deleteExpense(index);
+                System.out.println("Expense deleted successfully!");
+            } else {
+                System.out.println("Deletion process canceled.");
+
+            }
+
+        } else
+            System.out.println("Expense not found at index " + index);
     }
 
     private static void clearAllExpenses(ExpenseManager expenseManager) {
-      expenseManager.clearAllExpenses();
+        expenseManager.clearAllExpenses();
     }
 }

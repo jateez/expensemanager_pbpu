@@ -39,29 +39,29 @@ public class ExpenseManager {
     }
 
     public void updateExpense(int index, Expense updatedExpense) {
-      if (index >= 0 && index < expenses.size()) {
-          expenses.set(index, updatedExpense);
-          saveExpensesToTxt();
-          System.out.println("Expense updated successfully.");
-      } else {
-          System.out.println("Invalid index. Cannot update expense.");
-      }
+        if (index >= 0 && index < expenses.size()) {
+            expenses.set(index, updatedExpense);
+            saveExpensesToTxt();
+            System.out.println("Expense updated successfully.");
+        } else {
+            System.out.println("Invalid index. Cannot update expense.");
+        }
     }
 
     public void deleteExpense(int index) {
-      if (index >= 0 && index < expenses.size()) {
-          expenses.remove(index);
-          saveExpensesToTxt();
-          System.out.println("Expense deleted successfully.");
-      } else {
-          System.out.println("Invalid index. Cannot delete expense.");
-      }
+        if (index >= 0 && index < expenses.size()) {
+            expenses.remove(index);
+            saveExpensesToTxt();
+            System.out.println("Expense deleted successfully.");
+        } else {
+            System.out.println("Invalid index. Cannot delete expense.");
+        }
     }
 
     public void clearAllExpenses() {
-      expenses.clear();
-      saveExpensesToTxt();
-      System.out.println("All expenses cleared successfully.");
+        expenses.clear();
+        saveExpensesToTxt();
+        System.out.println("All expenses cleared successfully.");
     }
 
     private void saveExpensesToTxt() {
